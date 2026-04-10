@@ -1,36 +1,23 @@
-export function loadRazorpay() {
-  return new Promise((resolve) => {
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    script.onload = () => resolve(true);
-    script.onerror = () => resolve(false);
-    document.body.appendChild(script);
-  });
-}
-
 export async function payNow(amount) {
-  const res = await loadRazorpay();
+  const key = import.meta.env.VITE_RAZORPAY_KEY;
 
-  if (!res) {
-    alert("Razorpay failed to load");
-    return;
-  }
+  const script = document.createElement("script");
+  script.src = "https://checkout.razorpay.com/v1/checkout.js";
+  document.body.appendChild(script);
 
-  const options = {
-    key: "YOUR_RAZORPAY_KEY",
-    amount: amount * 100,
-    currency: "INR",
-    name: "HostAI",
-    description: "Hosting Payment",
-    handler: function (response) {
-      alert("Payment Success!");
-      console.log(response);
-    },
-    theme: {
-      color: "#00ffff"
-    }
+  script.onload = () => {
+    const options = {
+      key,
+      amount: amount * 100,
+      currency: "INR",
+      name: "HostAI",
+      description: "Hosting Payment",
+      handler: function () {
+        alert("Payment Successful ✅");
+      }
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
   };
-
-  const paymentObject = new window.Razorpay(options);
-  paymentObject.open();
 }
