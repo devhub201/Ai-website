@@ -1,20 +1,22 @@
-export default function Navbar() {
+export default function Navbar({ setPage }) {
   return (
     <nav style={{
       display: "flex",
       justifyContent: "space-between",
-      padding: "20px 40px",
-      alignItems: "center"
+      padding: "20px 40px"
     }}>
       <h2 style={{color:"#00ffff"}}>HostAI</h2>
 
       <div>
-        <a style={{margin:"0 15px", cursor:"pointer"}}>Home</a>
-        <a style={{margin:"0 15px", cursor:"pointer"}}>Plans</a>
-        <a style={{margin:"0 15px", cursor:"pointer"}}>Support</a>
+        <span onClick={() => setPage("home")}>Home</span>
+        <span onClick={() => setPage("plans")} style={{marginLeft:"20px"}}>
+          Plans
+        </span>
       </div>
 
-      <button className="btn">Dashboard →</button>
+      <button className="btn" onClick={() => setPage("login")}>
+        Login
+      </button>
     </nav>
   );
 }
