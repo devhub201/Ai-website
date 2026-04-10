@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #020617;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* GRID */
+body::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(#00ffff22 1px, transparent 1px),
+    linear-gradient(90deg, #00ffff22 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: -2;
+}
+
+/* GLOW LAYER (IMPORTANT 🔥) */
+body::after {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(0,255,255,0.15), transparent 70%);
+  z-index: -1;
+}
