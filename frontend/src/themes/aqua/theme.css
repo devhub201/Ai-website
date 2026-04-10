@@ -200,6 +200,63 @@ nav a:hover {
 /* SCROLLBAR */
 ::-webkit-scrollbar {
   width: 6px;
+  /* PAGE */
+.page-container {
+  padding: 40px;
+}
+
+/* CART */
+.cart-container {
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.cart-left {
+  flex: 2;
+}
+
+.cart-right {
+  flex: 1;
+  text-align: center;
+}
+
+/* CART ITEM */
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.remove-btn {
+  background: red;
+  color: white;
+}
+
+/* CHECKOUT */
+.checkout-box {
+  max-width: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.checkout-box input {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid cyan;
+  background: #020617;
+  color: white;
+}
+
+/* PAYMENT */
+.payment-box {
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+}
 }
 
 ::-webkit-scrollbar-thumb {
