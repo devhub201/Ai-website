@@ -1,65 +1,122 @@
 import { useState } from "react";
-import Home from "./pages/Home";
-import Plans from "./pages/Plans";
-import Category from "./pages/Category";
-import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
-import Payment from "./pages/Payment";
-import Login from "./pages/Login";
-import Admin from "./pages/Admin";
+import AiChat from "./components/AiChat";
 
 export default function App() {
   const [page, setPage] = useState("home");
-  const [category, setCategory] = useState("");
-  const [cart, setCart] = useState([]);
 
-  const addToCart = (plan) => {
-    setCart([...cart, plan]);
-    setPage("cart");
-  };
+  return (
+    <div className="fade-in">
 
-  const removeFromCart = (item) => {
-    setCart(cart.filter((i) => i !== item));
-  };
+      {/* NAVBAR */}
+      <nav style={{
+        display: "flex",
+        justifyContent: "space-between",
+        padding: "20px 40px"
+      }}>
+        <h2 style={{ color: "#00ffff" }}>HostAI</h2>
 
-  const renderPage = () => {
-    switch (page) {
-      case "home":
-        return <Home />;
+        <div>
+          <span onClick={() => setPage("home")}>Home</span>
+          <span onClick={() => setPage("hosting")}>Hosting</span>
+          <span onClick={() => setPage("cart")}>Cart</span>
+          <span onClick={() => setPage("login")}>Login</span>
+        </div>
+      </nav>
 
-      case "plans":
-        return <Plans setPage={setPage} setCategory={setCategory} />;
+      {/* HOME */}
+      {page === "home" && (
+        <div className="hero-container">
+          <div className="glass hero-card">
+            <p className="hero-tag">⚡ AI Powered Hosting</p>
+            <h1>Next Gen Hosting Platform</h1>
+            <p>
+              Fast, secure and AI automated hosting experience for developers
+            </p>
 
-      case "category":
-        return (
-          <Category category={category} addToCart={addToCart} />
-        );
+            <button
+              className="btn"
+              onClick={() => setPage("hosting")}
+              style={{ marginTop: "20px" }}
+            >
+              Explore Hosting
+            </button>
+          </div>
+        </div>
+      )}
 
-      case "cart":
-        return (
-          <Cart
-            cart={cart}
-            removeFromCart={removeFromCart}
-            setPage={setPage}
-          />
-        );
+      {/* HOSTING PAGE */}
+      {page === "hosting" && (
+        <div className="page-container">
+          <h1>Hosting Plans</h1>
 
-      case "checkout":
-        return <Checkout setPage={setPage} />;
+          <div className="plans-grid">
+            <div className="glass plan-card">
+              <h2>Basic</h2>
+              <p>₹199 / month</p>
+              <button className="btn" onClick={() => setPage("cart")}>
+                Buy
+              </button>
+            </div>
 
-      case "payment":
-        return <Payment />;
+            <div className="glass plan-card">
+              <h2>Pro</h2>
+              <p>₹499 / month</p>
+              <button className="btn" onClick={() => setPage("cart")}>
+                Buy
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
-      case "login":
-        return <Login setPage={setPage} />;
+      {/* CART */}
+      {page === "cart" && (
+        <div className="page-container">
+          <h1>Your Cart</h1>
 
-      case "admin":
-        return <Admin setPage={setPage} />;
+          <div className="glass">
+            <p>1x Hosting Plan</p>
+            <p>Total: ₹499</p>
 
-      default:
-        return <Home />;
-    }
-  };
+            <button className="btn" onClick={() => setPage("payment")}>
+              Checkout
+            </button>
+          </div>
+        </div>
+      )}
 
-  return renderPage();
+      {/* PAYMENT */}
+      {page === "payment" && (
+        <div className="page-container">
+          <h1>Payment</h1>
+
+          <div className="glass payment-box">
+            <p>Click below to pay</p>
+
+            <button className="btn">
+              Pay ₹499
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* LOGIN */}
+      {page === "login" && (
+        <div className="login-container">
+          <div className="glass login-box">
+            <h2>Login</h2>
+
+            <input placeholder="Email" />
+            <input placeholder="Password" type="password" />
+
+            <button className="btn">Login</button>
+          </div>
+        </div>
+      )}
+
+      {/* AI CHAT */}
+      <AiChat />
+
+    </div>
+  );
 }
