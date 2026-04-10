@@ -5,6 +5,8 @@ import Category from "./pages/Category";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Payment from "./pages/Payment";
+import Login from "./pages/Login";
+import Admin from "./pages/Admin";
 
 export default function App() {
   const [page, setPage] = useState("home");
@@ -29,7 +31,9 @@ export default function App() {
         return <Plans setPage={setPage} setCategory={setCategory} />;
 
       case "category":
-        return <Category category={category} addToCart={addToCart} />;
+        return (
+          <Category category={category} addToCart={addToCart} />
+        );
 
       case "cart":
         return (
@@ -45,6 +49,12 @@ export default function App() {
 
       case "payment":
         return <Payment />;
+
+      case "login":
+        return <Login setPage={setPage} />;
+
+      case "admin":
+        return <Admin setPage={setPage} />;
 
       default:
         return <Home />;
