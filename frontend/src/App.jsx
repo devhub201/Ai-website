@@ -1,52 +1,27 @@
 import { useState } from "react";
 import Home from "./pages/Home";
-
-/*
-  NOTE:
-  Abhi hum simple routing use kar rahe hain (no react-router yet)
-  Baad me upgrade karenge when pages increase
-*/
+import Plans from "./pages/Plans";
+import Category from "./pages/Category";
 
 export default function App() {
   const [page, setPage] = useState("home");
+  const [category, setCategory] = useState("");
 
   const renderPage = () => {
     switch (page) {
       case "home":
         return <Home />;
 
-      // future pages (already ready structure)
       case "plans":
-        return <div style={{padding:"40px"}}>Plans Page Coming Soon</div>;
+        return <Plans setPage={setPage} setCategory={setCategory} />;
 
-      case "cart":
-        return <div style={{padding:"40px"}}>Cart Page</div>;
-
-      case "checkout":
-        return <div style={{padding:"40px"}}>Checkout Page</div>;
-
-      case "admin":
-        return <div style={{padding:"40px"}}>Admin Panel</div>;
+      case "category":
+        return <Category category={category} />;
 
       default:
         return <Home />;
     }
   };
 
-  return (
-    <div>
-      {/* SIMPLE NAV CONTROL (temporary) */}
-      <div style={{
-        position: "fixed",
-        top: 10,
-        right: 10,
-        zIndex: 999
-      }}>
-        <button onClick={() => setPage("home")} className="btn">Home</button>
-        <button onClick={() => setPage("plans")} className="btn" style={{marginLeft:"10px"}}>Plans</button>
-      </div>
-
-      {renderPage()}
-    </div>
-  );
+  return renderPage();
 }
